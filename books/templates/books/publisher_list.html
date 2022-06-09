@@ -1,20 +1,14 @@
 {% extends "./base.html" %}
 {% block title %} Publishers List {% endblock %}
 {% block content %}
-<table style="margin: 20px 5px ; width: 100%;">
+<table style="margin: 20px 5px ; width: 100%;border: 1px solid;border-collapse: collapse;">
     <caption>Publishers list</caption>
     <tr style="text-align: center ;">
         <th>Publisher name</th>
-        <th>Country</th>
-        <th>City</th>
-        <th>Website</th>
     </tr>
     {% for publisher in object_list %}
     <tr style="text-align: center ;">
-        <td>{{ publisher.name }}</td>
-        <td>{{ publisher.country }}</td>
-        <td>{{ publisher.city }}</td>
-        <td><a href={{ publisher.website }}>{{ publisher.website }}</a></td>
+        <td style="border: 1px solid;"><a href="{% url 'books:pub_details' publisher.id %}">{{ publisher.name }}</a></td>
     </tr>
     {% endfor %}
 </table>

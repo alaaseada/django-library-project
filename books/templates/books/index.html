@@ -1,14 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books</title>
-</head>
-<body>
-    {% for book in object_list %}
-    <p> {{ book.name }}</p>
-    {% endfor %}
-</body>
-</html>
+{% extends "./base.html" %}
+{% block title %} Available Books {% endblock title %}
+{% block content %}
+<ul style="list-style-type: none;">
+{% for book in books_list %}
+    <li><strong>{{ forloop.counter }}. {{ book.title }}</strong><br/>
+        <strong>Authors:</strong>
+        <ul>
+        {% for auth in book.author.all %}
+            <li> {{ auth.title }}. {{ auth.name }}</li>
+        {% endfor %}
+        </ul>
+        <strong>Publisher: </strong>{{ book.publisher }}<br/>
+        <strong>Publication date: </strong> {{ book.publication_date }}<br/>
+        <strong>Cover: </strong><br/>
+        <img src="../{{ book.cover }}">
+    </li>
+    <br/>
+{% endfor %}
+</ul>
+{% endblock content %}

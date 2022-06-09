@@ -36,4 +36,4 @@ class Book(models.Model):
     cover = models.ImageField(upload_to='books_covers')
 
     def __str__(self) -> str:
-        return self.name
+        return self.title

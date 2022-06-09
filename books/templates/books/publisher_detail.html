@@ -1,0 +1,16 @@
+{% extends './base.html' %}
+{% block title %} Publisher details {% endblock title%}
+
+
+{% block content %} 
+    <p><strong>Name:</strong>{{ publisher.name }}</p>
+    <p><strong>Country:</strong>{{ publisher.country }}</p>
+    <p><strong>City: </strong>{{ publisher.city }}</p>
+    <p><strong>Website: </strong><a href={{ publisher.website }}>{{ publisher.website }}</a></p>
+    <p><strong>Published books:</strong></p>
+    <ul>
+        {% for book in books_list %}
+        <li> {{ book.title }}</li>
+        {% endfor %}
+    </ul>
+{% endblock content%}
