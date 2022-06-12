@@ -1,4 +1,5 @@
 from asyncio.base_subprocess import WriteSubprocessPipeProto
+from datetime import datetime, timedelta
 from distutils.command.upload import upload
 from django.db import models
 
@@ -34,6 +35,9 @@ class Book(models.Model):
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     publication_date = models.DateField()
     cover = models.ImageField(upload_to='books_covers')
+
+    def is_published_recently(self):
+        return  (datetime.today() - timedelta(days=30)).date() <= self.publication_date <= datetime.today().date()
 
     def __str__(self) -> str:
         return self.title

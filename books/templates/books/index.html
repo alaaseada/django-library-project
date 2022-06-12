@@ -1,21 +1,25 @@
 {% extends "./base.html" %}
 {% block title %} Available Books {% endblock title %}
 {% block content %}
-<ul style="list-style-type: none;">
-{% for book in books_list %}
-    <li><strong>{{ forloop.counter }}. {{ book.title }}</strong><br/>
-        <strong>Authors:</strong>
-        <ul>
-        {% for auth in book.author.all %}
-            <li> {{ auth.title }}. {{ auth.name }}</li>
-        {% endfor %}
-        </ul>
-        <strong>Publisher: </strong>{{ book.publisher }}<br/>
-        <strong>Publication date: </strong> {{ book.publication_date }}<br/>
-        <strong>Cover: </strong><br/>
-        <img src="../{{ book.cover }}">
-    </li>
-    <br/>
-{% endfor %}
-</ul>
+{% if books_list %}
+    <ul style="list-style-type: none;">
+    {% for book in books_list %}
+        <li><strong>{{ forloop.counter }}. {{ book.title }}</strong><br/>
+            <strong>Authors:</strong>
+            <ul>
+            {% for auth in book.author.all %}
+                <li> {{ auth.title }}. {{ auth.name }}</li>
+            {% endfor %}
+            </ul>
+            <strong>Publisher: </strong>{{ book.publisher }}<br/>
+            <strong>Publication date: </strong> {{ book.publication_date }}<br/>
+            <strong>Cover: </strong><br/>
+            <img src="../{{ book.cover }}">
+        </li>
+        <br/>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No books are available</p>
+{% endif %}
 {% endblock content %}

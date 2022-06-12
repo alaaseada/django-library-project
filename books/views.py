@@ -1,8 +1,9 @@
-from ast import List
-from django.shortcuts import render
-from django.http import HttpResponse
+# from django.shortcuts import render
+# from django.http import HttpResponse
+from urllib import request
 from django.views.generic import ListView, DetailView
 from .models import Book, Author, Publisher
+from datetime import datetime
 
 import books
 
@@ -12,6 +13,16 @@ class IndexView(ListView):
     context_object_name = "books_list"
     template_name = "books/index.html"
 
+    def get_queryset(self):
+        return Book.objects.filter(publication_date__lte=datetime.today().date()).order_by('-publication_date')[:5]
+
+
+
+class DetailsView(DetailView):
+    model = Book
+
+    def get_queryset(self):
+        return Book.objects.filter(pk=self.kwargs['pk'], publication_date__lte=datetime.today().date())
 
 
 class PublisherView(ListView):

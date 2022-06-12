@@ -1,0 +1,9 @@
+{% extends './base.html' %}
+{% block title %} Book details {% endblock title%}
+
+
+{% block content %} 
+    <p><strong>Title:</strong>{{ book.title }}</p>
+    <p><strong>Publication date:</strong>{{ book.publication_date }}</p>
+    <img src={{ book.cover }}>
+{% endblock content%}
